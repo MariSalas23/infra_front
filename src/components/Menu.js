@@ -9,6 +9,9 @@ function Menu() {
         <Link to="/formulario">
           <button style={buttonStyle}>Registrar Vacunación</button>
         </Link>
+        <Link to="/crear-campania">
+          <button style={buttonStyle}>Crear Campaña</button>
+        </Link>
         {/* Más opciones del menú pueden añadirse aquí */}
       </div>
     </div>

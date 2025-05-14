@@ -4,6 +4,7 @@ import SignIn from './components/SignIn';
 import Login from './components/Login';
 import Menu from './components/Menu';
 import Formulario from './components/Formulario';
+import CrearCampania from './components/CrearCampania';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/formulario" element={<Formulario />} />
+          <Route path="/crear-campania" element={<CrearCampania />} />
         </Routes>
       </div>
     </Router>
