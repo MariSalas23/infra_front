@@ -8,6 +8,7 @@ import CrearCampania from './components/CrearCampania';
 import VerCampanas from './components/VerCampanas';
 import GestionAnimales from './components/GestionAnimales';
 import VerAnimales from './components/VerAnimales';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/ver-campanas" element={<VerCampanas />} />
           <Route path="/registrar-animal" element={<GestionAnimales />} />
           <Route path="/ver-animales" element={<VerAnimales />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </div>
     </Router>
