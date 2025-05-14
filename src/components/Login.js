@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Bienvenido de nuevo, ${username}`);
-    // Aquí puedes verificar el usuario con un backend
+    navigate('/menu'); // Redirige a la página de menú después de login
   };
 
   return (
-    <div className="login" style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
       <h2 style={{ textAlign: 'center', color: '#388e3c' }}>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '10px' }}>
