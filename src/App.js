@@ -5,6 +5,9 @@ import Login from './components/Login';
 import Menu from './components/Menu';
 import Formulario from './components/Formulario';
 import CrearCampania from './components/CrearCampania';
+import VerCampanas from './components/VerCampanas';
+import GestionAnimales from './components/GestionAnimales';
+import VerAnimales from './components/VerAnimales';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/formulario" element={<Formulario />} />
           <Route path="/crear-campania" element={<CrearCampania />} />
+          <Route path="/ver-campanas" element={<VerCampanas />} />
+          <Route path="/registrar-animal" element={<GestionAnimales />} />
+          <Route path="/ver-animales" element={<VerAnimales />} />
         </Routes>
       </div>
     </Router>

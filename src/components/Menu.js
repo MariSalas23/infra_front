@@ -12,7 +12,15 @@ function Menu() {
         <Link to="/crear-campania">
           <button style={buttonStyle}>Crear Campaña</button>
         </Link>
-        {/* Más opciones del menú pueden añadirse aquí */}
+        <Link to="/ver-campanas">
+          <button style={buttonStyle}>Ver Campañas</button>
+        </Link>
+        <Link to="/registrar-animal">
+          <button style={buttonStyle}>Registrar Animal</button>
+        </Link>
+        <Link to="/ver-animales">
+          <button style={buttonStyle}>Ver Animales</button>
+        </Link>
       </div>
     </div>
   );
