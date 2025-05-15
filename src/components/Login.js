@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Importa axios para realizar solicitudes HTTP
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -11,26 +10,38 @@ function Login() {
     e.preventDefault();
 
     try {
-      // Enviar los datos de login (usuario y contraseña) a la API
-      const response = await axios.post('http://13.217.181.207/api/login', {
-        username,
-        password,
+      // Realizar la solicitud POST a la API usando fetch
+      const response = await fetch('http://13.217.181.207/api/usuarios/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: username,
+          password,
+        }),
       });
 
-      // Suponiendo que la API devuelve el token de acceso
-      const { token } = response.data;
+      // Verifica si la respuesta es exitosa
+      if (response.ok) {
+        const data = await response.json();
+        
+        // Suponiendo que la API devuelve el token de acceso
+        const { token } = data;
 
-      // Guardar el token en localStorage o en una cookie
-      localStorage.setItem('authToken', token); // Aquí lo guardamos en localStorage
+        // Guardar el token en localStorage
+        localStorage.setItem('authToken', token);
 
-      // También puedes guardarlo en una cookie si lo prefieres, por ejemplo:
-      // document.cookie = `authToken=${token}; path=/;`;
-
-      alert(`Bienvenido de nuevo, ${username}`);
-      navigate('/menu'); // Redirige a la página de menú después de login
+        alert(`Bienvenido de nuevo, ${username}`);
+        navigate('/menu'); // Redirige a la página de menú después de login
+      } else {
+        const errorData = await response.json();
+        console.error('Error en el login:', errorData);
+        alert('Error al iniciar sesión. Por favor, revisa tus credenciales.');
+      }
     } catch (error) {
-      console.error('Error en el login:', error);
-      alert('Error al iniciar sesión. Por favor, revisa tus credenciales.');
+      console.error('Error al hacer la solicitud:', error);
+      alert('Hubo un problema con la solicitud. Intenta de nuevo.');
     }
   };
 
@@ -40,7 +51,7 @@ function Login() {
         <h2 style={{ textAlign: 'center', color: '#126636' }}>Iniciar sesión</h2>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '10px' }}>
-            <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Nombre de usuario</label>
+            <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Email</label>
             <input
               type="text"
               id="username"
