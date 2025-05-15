@@ -167,35 +167,6 @@ function GestionAnimales() {
           </button>
         </form>
       </div>
-
-      {/* Mostrar los animales registrados */}
-      <h3 style={{ color: '#126636', marginTop: '20px' }}>Animales Registrados</h3>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
-        {animales.length > 0 ? (
-          animales.map((animal, index) => (
-            <div
-              key={index}
-              style={{
-                width: '300px',
-                padding: '20px',
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <h3 style={{ color: '#126636' }}>{`ID: ${animal.codigoIdentificacion}`}</h3>
-              <p><strong>Especie:</strong> {animal.especie}</p>
-              <p><strong>Fecha de Nacimiento:</strong> {animal.fechaNacimiento}</p>
-              <p><strong>Sexo:</strong> {animal.sexo}</p>
-              <p><strong>Finca:</strong> {animal.finca}</p>
-              <p><strong>Municipio:</strong> {animal.municipio}</p>
-              <p><strong>Región:</strong> {animal.region}</p>
-            </div>
-          ))
-        ) : (
-          <p>No se han registrado animales aún.</p>
-        )}
-      </div>
     </div>
   );
 }
