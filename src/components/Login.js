@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Importa axios para realizar solicitudes HTTP
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ function Login() {
     try {
       // Enviar los datos de login (usuario y contraseña) a la API
       const response = await axios.post('http://13.217.181.207/api/login', {
-        username,
+        email,
         password,
       });
 
@@ -26,7 +26,7 @@ function Login() {
       // También puedes guardarlo en una cookie si lo prefieres, por ejemplo:
       // document.cookie = `authToken=${token}; path=/;`;
 
-      alert(`Bienvenido de nuevo, ${username}`);
+      alert(`Bienvenido de nuevo, ${email}`);
       navigate('/menu'); // Redirige a la página de menú después de login
     } catch (error) {
       console.error('Error en el login:', error);
@@ -40,12 +40,12 @@ function Login() {
         <h2 style={{ textAlign: 'center', color: '#126636' }}>Iniciar sesión</h2>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '10px' }}>
-            <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Nombre de usuario</label>
+            <label htmlFor="email" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Nombre de usuario</label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
               style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
               required
             />
