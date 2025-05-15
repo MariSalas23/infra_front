@@ -6,7 +6,7 @@ function VerCampanas() {
   const [campañas, setCampañas] = useState([]);
 
   // URL de la API para obtener las campañas (ajusta según la ruta correcta)
-  const apiUrl = 'http://13.217.181.207/api/campanas'; // Reemplaza con la URL real de tu API
+  const apiUrl = 'http://13.217.181.207/api/campañas'; // Reemplaza con la URL real de tu API
 
   // Función para obtener campañas desde la API
   const obtenerCampanas = async () => {
