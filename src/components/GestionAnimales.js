@@ -8,7 +8,7 @@ function GestionAnimales() {
   const [sexo, setSexo] = useState('');
   const [finca, setFinca] = useState('');
   const [municipio, setMunicipio] = useState('');
-  const [region, setRegion] = useState('');
+  const [región, setRegion] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ function GestionAnimales() {
       sexo,
       finca,
       municipio,
-      region
+      región
     };
 
     try {
@@ -85,7 +85,7 @@ function GestionAnimales() {
           </div>
           <Campo texto="Finca" id="finca" valor={finca} setValor={setFinca} />
           <Campo texto="Municipio" id="municipio" valor={municipio} setValor={setMunicipio} />
-          <Campo texto="Región" id="region" valor={region} setValor={setRegion} />
+          <Campo texto="Región" id="region" valor={región} setValor={setRegion} />
           <button type="submit" style={botonStyle}>Registrar Animal</button>
         </form>
       </div>
