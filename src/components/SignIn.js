@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -11,29 +10,36 @@ function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Verificar que las contraseñas coincidan
+
     if (password !== password2) {
       alert('Las contraseñas no coinciden');
       return;
     }
 
-    // Crear el objeto con los datos del formulario
     const userData = {
       email,
       first_name: firstName,
       last_name: lastName,
       rol,
       password,
-      password2
+      password2,
     };
 
     try {
-      // Enviar la solicitud POST a la API
-      const response = await axios.post('http://tu-api-url/usuarios/registro', userData);
-      
+      const response = await fetch('http://13.217.181.207/api/usuarios/registro/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
       if (response.status === 201) {
         alert('Cuenta creada exitosamente');
-        // Aquí podrías redirigir a la página de inicio de sesión o a otra parte
+      } else {
+        const errorData = await response.json();
+        console.error('Respuesta de error:', errorData);
+        alert('Hubo un problema al registrar el usuario');
       }
     } catch (error) {
       console.error('Error al registrar el usuario:', error);
@@ -55,7 +61,6 @@ function SignIn() {
         <h2 style={{ color: '#126636' }}>Crear Cuenta</h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Email */}
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="email" style={labelStyle}>Email</label>
             <input
@@ -68,7 +73,6 @@ function SignIn() {
             />
           </div>
 
-          {/* First Name */}
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="firstName" style={labelStyle}>Nombre</label>
             <input
@@ -81,7 +85,6 @@ function SignIn() {
             />
           </div>
 
-          {/* Last Name */}
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="lastName" style={labelStyle}>Apellido</label>
             <input
@@ -94,7 +97,6 @@ function SignIn() {
             />
           </div>
 
-          {/* Rol */}
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="rol" style={labelStyle}>Rol</label>
             <select
@@ -109,7 +111,6 @@ function SignIn() {
             </select>
           </div>
 
-          {/* Contraseña */}
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="password" style={labelStyle}>Contraseña</label>
             <input
@@ -122,7 +123,6 @@ function SignIn() {
             />
           </div>
 
-          {/* Confirmar Contraseña */}
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="password2" style={labelStyle}>Confirmar Contraseña</label>
             <input
@@ -135,7 +135,6 @@ function SignIn() {
             />
           </div>
 
-          {/* Botón de Enviar */}
           <button
             type="submit"
             style={{
@@ -156,7 +155,6 @@ function SignIn() {
   );
 }
 
-// Estilos de los elementos
 const labelStyle = {
   display: 'block',
   fontSize: '14px',
