@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -10,16 +10,10 @@ function Login() {
     e.preventDefault();
 
     try {
-      // Realizar la solicitud POST a la API usando fetch
-      const response = await fetch('http://13.217.181.207/api/usuarios/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: username,
-          password,
-        }),
+      // Enviar los datos de login (usuario y contraseña) a la API
+      const response = await axios.post('http://13.217.181.207/api/login', {
+        username,
+        password,
       });
 
       // Verifica si la respuesta es exitosa
@@ -32,13 +26,8 @@ function Login() {
         // Guardar el token en localStorage
         localStorage.setItem('authToken', token);
 
-        alert(`Bienvenido de nuevo, ${username}`);
-        navigate('/menu'); // Redirige a la página de menú después de login
-      } else {
-        const errorData = await response.json();
-        console.error('Error en el login:', errorData);
-        alert('Error al iniciar sesión. Por favor, revisa tus credenciales.');
-      }
+      alert(`Bienvenido de nuevo, ${username}`);
+      navigate('/menu'); // Redirige a la página de menú después de login
     } catch (error) {
       console.error('Error al hacer la solicitud:', error);
       alert('Hubo un problema con la solicitud. Intenta de nuevo.');
@@ -51,12 +40,12 @@ function Login() {
         <h2 style={{ textAlign: 'center', color: '#126636' }}>Iniciar sesión</h2>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '10px' }}>
-            <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Email</label>
+            <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Nombre de usuario</label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
               style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
               required
             />
