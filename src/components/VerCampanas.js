@@ -1,39 +1,32 @@
 import React, { useState, useEffect } from 'react';
 
 function VerCampanas() {
-  const [campañas, setCampañas] = useState([]);
-
-  const apiUrl = 'http://13.217.181.207/api/vacunacion/campanas';
-
-  useEffect(() => {
-    const fetchCampanas = async () => {
-      const token = localStorage.getItem('authToken');
-
-      if (!token) {
-        alert('No se ha encontrado el token de autenticación. Por favor, inicia sesión.');
-        return;
-      }
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          setCampañas(data);
-        } else {
-          alert('Error al obtener las campañas');
+  const [campañas, setCampanas] = useState([]);
+  
+    useEffect(() => {
+      const fetchCampanas= async () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+          alert('No se ha encontrado el token. Por favor, inicia sesión.');
+          return;
         }
-      } catch (error) {
-        console.error('Error al obtener las campañas:', error);
-        alert('Hubo un error al obtener las campañas');
-      }
-    };
+  
+        try {
+          const response = await fetch('http://13.217.181.207/api/vacunacion/campanas/', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+  
+          if (!response.ok) throw new Error('Error en la respuesta de la API');
+  
+          const data = await response.json();
+          setCampanas(data);
+        } catch (error) {
+          console.error('Error al obtener las campañas.', error);
+          alert('No se pudieron cargar las campañas.');
+        }
+      };
 
     fetchCampanas();
   }, []);
