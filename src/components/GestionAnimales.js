@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API_BASE_URL from "../baseApi"; // Ruta a tu archivo de configuración
+import BackButton from "./BackButton";
 
 function GestionAnimales() {
   const [codigoIdentificacion, setCodigoIdentificacion] = useState("");
@@ -8,7 +9,7 @@ function GestionAnimales() {
   const [sexo, setSexo] = useState("");
   const [finca, setFinca] = useState("");
   const [municipio, setMunicipio] = useState("");
-  const [región, setRegion] = useState("");
+  const [region, setRegion] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ function GestionAnimales() {
       sexo,
       finca,
       municipio,
-      región,
+      región: region,
     };
 
     try {
@@ -43,40 +44,44 @@ function GestionAnimales() {
 
       if (response.ok) {
         alert("Animal registrado exitosamente");
-        setCodigoIdentificacion("");
-        setEspecie("");
-        setFechaNacimiento("");
-        setSexo("");
-        setFinca("");
-        setMunicipio("");
-        setRegion("");
+        limpiarFormulario();
       } else {
         const errorData = await response.json();
-        console.error("Error:", errorData);
-        alert("Error al registrar el animal");
+        console.error("Error en API:", errorData);
+        alert("Error al registrar el animal. Intenta de nuevo.");
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);
-      alert("Error al conectar con la API");
+      alert("Error de conexión con la API.");
     }
   };
 
+  const limpiarFormulario = () => {
+    setCodigoIdentificacion("");
+    setEspecie("");
+    setFechaNacimiento("");
+    setSexo("");
+    setFinca("");
+    setMunicipio("");
+    setRegion("");
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center", color: "#126636" }}>
-        Gestión de Animales
-      </h2>
-      <div
-        style={{
-          maxWidth: "600px",
-          margin: "0 auto",
-          padding: "40px",
-          backgroundColor: "#ffffff",
-          borderRadius: "8px",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <h3 style={{ color: "#126636" }}>Registrar Nuevo Animal</h3>
+    <div style={containerStyle}>
+      <div style={formContainerStyle}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "self-center",
+            justifyItems: "center",
+          }}
+        >
+          <div style={{ margin: "auto" }}>
+            <BackButton />
+          </div>
+
+          <h3 style={subtitleStyle}>Registrar Nuevo Animal</h3>
+        </div>
         <form onSubmit={handleSubmit}>
           <Campo
             texto="Código de Identificación"
@@ -84,22 +89,18 @@ function GestionAnimales() {
             valor={codigoIdentificacion}
             setValor={setCodigoIdentificacion}
           />
-          <div style={{ marginBottom: "10px" }}>
-            <label htmlFor="especie" style={labelStyle}>
-              Especie
-            </label>
-            <select
-              id="especie"
-              value={especie}
-              onChange={(e) => setEspecie(e.target.value)}
-              style={inputStyle}
-              required
-            >
-              <option value="">Selecciona Especie</option>
-              <option value="porcino">Porcino</option>
-              <option value="bovino">Bovino</option>
-            </select>
-          </div>
+
+          <SelectCampo
+            texto="Especie"
+            id="especie"
+            valor={especie}
+            setValor={setEspecie}
+            opciones={[
+              { value: "", label: "Selecciona Especie" },
+              { value: "porcino", label: "Porcino" },
+              { value: "bovino", label: "Bovino" },
+            ]}
+          />
 
           <Campo
             tipo="date"
@@ -108,22 +109,19 @@ function GestionAnimales() {
             valor={fechaNacimiento}
             setValor={setFechaNacimiento}
           />
-          <div style={{ marginBottom: "10px" }}>
-            <label htmlFor="sexo" style={labelStyle}>
-              Sexo
-            </label>
-            <select
-              id="sexo"
-              value={sexo}
-              onChange={(e) => setSexo(e.target.value)}
-              style={inputStyle}
-              required
-            >
-              <option value="">Selecciona Sexo</option>
-              <option value="macho">Macho</option>
-              <option value="hembra">Hembra</option>
-            </select>
-          </div>
+
+          <SelectCampo
+            texto="Sexo"
+            id="sexo"
+            valor={sexo}
+            setValor={setSexo}
+            opciones={[
+              { value: "", label: "Selecciona Sexo" },
+              { value: "macho", label: "Macho" },
+              { value: "hembra", label: "Hembra" },
+            ]}
+          />
+
           <Campo texto="Finca" id="finca" valor={finca} setValor={setFinca} />
           <Campo
             texto="Municipio"
@@ -134,10 +132,11 @@ function GestionAnimales() {
           <Campo
             texto="Región"
             id="region"
-            valor={región}
+            valor={region}
             setValor={setRegion}
           />
-          <button type="submit" style={botonStyle}>
+
+          <button type="submit" style={buttonStyle}>
             Registrar Animal
           </button>
         </form>
@@ -146,9 +145,10 @@ function GestionAnimales() {
   );
 }
 
+// Input text/date component reutilizable
 function Campo({ texto, id, valor, setValor, tipo = "text" }) {
   return (
-    <div style={{ marginBottom: "10px" }}>
+    <div style={fieldContainerStyle}>
       <label htmlFor={id} style={labelStyle}>
         {texto}
       </label>
@@ -164,28 +164,104 @@ function Campo({ texto, id, valor, setValor, tipo = "text" }) {
   );
 }
 
+// Select component reutilizable
+function SelectCampo({ texto, id, valor, setValor, opciones }) {
+  return (
+    <div style={fieldContainerStyle}>
+      <label htmlFor={id} style={labelStyle}>
+        {texto}
+      </label>
+      <select
+        id={id}
+        value={valor}
+        onChange={(e) => setValor(e.target.value)}
+        style={selectStyle}
+        required
+      >
+        {opciones.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+// Estilos
+
+const containerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
+const formContainerStyle = {
+  margin: "40px auto",
+  maxWidth: "600px",
+  width: "100%",
+  padding: "40px",
+  backgroundColor: "#ffffff",
+  borderRadius: "10px",
+  boxShadow: "0 6px 12px rgba(0,0,0,0.15)",
+};
+
+const titleStyle = {
+  textAlign: "center",
+  color: "#126636",
+  fontSize: "2.2rem",
+  fontWeight: "700",
+  marginBottom: "30px",
+};
+
+const subtitleStyle = {
+  width: "80%",
+  color: "#126636",
+  fontSize: "1.6rem",
+  fontWeight: "600",
+  marginBottom: "25px",
+};
+
+const fieldContainerStyle = {
+  marginBottom: "18px",
+};
+
 const labelStyle = {
   display: "block",
-  fontSize: "14px",
+  fontSize: "15px",
   color: "#126636",
+  marginBottom: "6px",
+  fontWeight: "600",
 };
 
 const inputStyle = {
   width: "100%",
-  padding: "10px",
-  borderRadius: "4px",
-  border: "1px solid #ccc",
-  marginTop: "5px",
+  padding: "12px",
+  borderRadius: "6px",
+  border: "1.5px solid #b2d8a6",
+  fontSize: "1rem",
+  transition: "border-color 0.3s ease",
 };
 
-const botonStyle = {
+const selectStyle = {
+  ...inputStyle,
+  appearance: "none",
+  backgroundColor: "white",
+  cursor: "pointer",
+};
+
+const buttonStyle = {
   backgroundColor: "#126636",
   color: "white",
-  padding: "10px 20px",
-  borderRadius: "4px",
+  padding: "14px 20px",
+  borderRadius: "25px",
   border: "none",
   width: "100%",
+  fontSize: "1.1rem",
+  fontWeight: "700",
   cursor: "pointer",
+  boxShadow: "0 5px 15px rgba(18, 102, 54, 0.4)",
+  transition: "background-color 0.3s ease, transform 0.2s ease",
 };
 
 export default GestionAnimales;

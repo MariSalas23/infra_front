@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import BackButton from "./BackButton";
 
 function SignIn() {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [rol, setRol] = useState('vacunador');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [rol, setRol] = useState("vacunador");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== password2) {
-      alert('Las contraseñas no coinciden');
+      alert("Las contraseñas no coinciden");
       return;
     }
 
@@ -26,125 +27,132 @@ function SignIn() {
     };
 
     try {
-      const response = await fetch('http://13.217.181.207/api/usuarios/registro/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        "http://13.217.181.207/api/usuarios/registro/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       if (response.status === 201) {
-        alert('Cuenta creada exitosamente');
+        alert("Cuenta creada exitosamente");
       } else {
         const errorData = await response.json();
-        console.error('Respuesta de error:', errorData);
-        alert('Hubo un problema al registrar el usuario');
+        console.error("Respuesta de error:", errorData);
+        alert("Hubo un problema al registrar el usuario");
       }
     } catch (error) {
-      console.error('Error al registrar el usuario:', error);
-      alert('Hubo un problema al registrar el usuario');
+      console.error("Error al registrar el usuario:", error);
+      alert("Hubo un problema al registrar el usuario");
     }
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#b5e1a5', height: '100vh' }}>
-      <div style={{
-        maxWidth: '400px',
-        margin: '0 auto',
-        padding: '40px',
-        backgroundColor: '#ffffff',
-        borderRadius: '8px',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        textAlign: 'center',
-      }}>
-        <h2 style={{ color: '#126636' }}>Crear Cuenta</h2>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "450px",
+          margin: "20px 0px",
+          backgroundColor: "#ffffff",
+          padding: "40px",
+          borderRadius: "12px",
+          boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "self-center",
+            justifyItems: "center",
+          }}
+        >
+          <div style={{ margin: "auto" }}>
+            <BackButton />
+          </div>
+
+          <h2
+            style={{
+              textAlign: "center",
+              color: "#126636",
+              marginBottom: "30px",
+              width: "100%",
+            }}
+          >
+            Crear Cuenta
+          </h2>
+        </div>
 
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="email" style={labelStyle}>Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={inputStyle}
-              required
-            />
-          </div>
+          <InputField
+            label="Email"
+            type="email"
+            value={email}
+            setValue={setEmail}
+          />
+          <InputField
+            label="Nombre"
+            type="text"
+            value={firstName}
+            setValue={setFirstName}
+          />
+          <InputField
+            label="Apellido"
+            type="text"
+            value={lastName}
+            setValue={setLastName}
+          />
 
-          <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="firstName" style={labelStyle}>Nombre</label>
-            <input
-              type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              style={inputStyle}
-              required
-            />
-          </div>
-
-          <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="lastName" style={labelStyle}>Apellido</label>
-            <input
-              type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              style={inputStyle}
-              required
-            />
-          </div>
-
-          <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="rol" style={labelStyle}>Rol</label>
+          <div style={fieldContainerStyle}>
+            <label htmlFor="rol" style={labelStyle}>
+              Rol
+            </label>
             <select
               id="rol"
               value={rol}
               onChange={(e) => setRol(e.target.value)}
               style={inputStyle}
-              required
             >
               <option value="vacunador">Vacunador</option>
               <option value="admin">Administrador</option>
             </select>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="password" style={labelStyle}>Contraseña</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={inputStyle}
-              required
-            />
-          </div>
-
-          <div style={{ marginBottom: '20px' }}>
-            <label htmlFor="password2" style={labelStyle}>Confirmar Contraseña</label>
-            <input
-              type="password"
-              id="password2"
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-              style={inputStyle}
-              required
-            />
-          </div>
+          <InputField
+            label="Contraseña"
+            type="password"
+            value={password}
+            setValue={setPassword}
+          />
+          <InputField
+            label="Confirmar Contraseña"
+            type="password"
+            value={password2}
+            setValue={setPassword2}
+          />
 
           <button
             type="submit"
             style={{
-              backgroundColor: '#126636',
-              color: 'white',
-              padding: '10px 20px',
-              borderRadius: '4px',
-              border: 'none',
-              width: '100%',
-              cursor: 'pointer',
+              backgroundColor: "#126636",
+              color: "#fff",
+              padding: "12px",
+              borderRadius: "6px",
+              border: "none",
+              fontSize: "16px",
+              width: "100%",
+              marginTop: "20px",
+              cursor: "pointer",
             }}
           >
             Crear Cuenta
@@ -155,18 +163,41 @@ function SignIn() {
   );
 }
 
+function InputField({ label, type, value, setValue }) {
+  return (
+    <div style={fieldContainerStyle}>
+      <label style={labelStyle}>{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        style={inputStyle}
+        required
+      />
+    </div>
+  );
+}
+
+const fieldContainerStyle = {
+  marginBottom: "20px",
+  display: "flex",
+  flexDirection: "column",
+};
+
 const labelStyle = {
-  display: 'block',
-  fontSize: '14px',
-  color: '#126636',
+  fontSize: "14px",
+  color: "#126636",
+  marginBottom: "6px",
+  fontWeight: "500",
 };
 
 const inputStyle = {
-  width: '100%',
-  padding: '10px',
-  borderRadius: '4px',
-  border: '1px solid #ccc',
-  marginTop: '5px',
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #ccc",
+  fontSize: "15px",
+  outline: "none",
+  transition: "border-color 0.3s",
 };
 
 export default SignIn;

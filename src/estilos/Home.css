@@ -1,6 +1,5 @@
 /* Contenedor principal de la página */
 .home-container {
-  padding: 20px;
   background-color: #b5e1a5;
   height: 100vh;
   display: flex;

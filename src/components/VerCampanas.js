@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import BackButton from "./BackButton";
 
 function VerCampanas() {
   const [campañas, setCampanas] = useState([]);
@@ -38,7 +39,22 @@ function VerCampanas() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center", color: "#126636" }}>Ver Campañas</h2>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "self-center",
+          justifyItems: "center",
+        }}
+      >
+        <div style={{ margin: "auto" }}>
+          <BackButton />
+        </div>
+
+        <h2 style={{ textAlign: "center", color: "#126636", width: "100%" }}>
+          Ver Campañas
+        </h2>
+      </div>
+
       <div
         style={{
           display: "flex",
