@@ -17,7 +17,7 @@ function Login() {
       <h2 style={{ textAlign: 'center', color: '#388e3c' }}>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '10px' }}>
-          <label htmlFor="username" style={{ display: 'block', fontSize: '14px', color: '#388e3c' }}>Nombre de usuario</label>
+          <label htmlFor="username" style={{ display: 'block', fontSize: '14px', color: '#388e3c' }}>Correo</label>
           <input
             type="text"
             id="username"
