@@ -14,10 +14,10 @@ function Login() {
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
-      <h2 style={{ textAlign: 'center', color: '#388e3c' }}>Iniciar sesión</h2>
+      <h2 style={{ textAlign: 'center', color: '#126636' }}>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '10px' }}>
-          <label htmlFor="username" style={{ display: 'block', fontSize: '14px', color: '#388e3c' }}>Nombre de usuario</label>
+          <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Nombre de usuario</label>
           <input
             type="text"
             id="username"
@@ -28,7 +28,7 @@ function Login() {
           />
         </div>
         <div style={{ marginBottom: '10px' }}>
-          <label htmlFor="password" style={{ display: 'block', fontSize: '14px', color: '#388e3c' }}>Contraseña</label>
+          <label htmlFor="password" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Contraseña</label>
           <input
             type="password"
             id="password"
@@ -41,10 +41,10 @@ function Login() {
         <button
           type="submit"
           style={{
-            backgroundColor: '#388e3c',
+            backgroundColor: '#126636',
             color: 'white',
             padding: '10px 20px',
-            borderRadius: '4px',
+            borderRadius: '20px',
             border: 'none',
             width: '100%',
             cursor: 'pointer',

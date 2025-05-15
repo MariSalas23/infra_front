@@ -42,7 +42,7 @@ function GestionAnimales() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2 style={{ textAlign: 'center', color: '#388e3c' }}>Gestión de Animales</h2>
+      <h2 style={{ textAlign: 'center', color: '#126636' }}>Gestión de Animales</h2>
 
       {/* Contenedor con borde blanco para el formulario */}
       <div style={{
@@ -54,7 +54,7 @@ function GestionAnimales() {
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
       }}>
         {/* Formulario de Registro de Animal */}
-        <h3 style={{ color: '#388e3c' }}>Registrar Nuevo Animal</h3>
+        <h3 style={{ color: '#126636' }}>Registrar Nuevo Animal</h3>
         <form onSubmit={handleSubmit}>
           {/* Código de Identificación */}
           <div style={{ marginBottom: '10px' }}>
@@ -154,7 +154,7 @@ function GestionAnimales() {
           <button
             type="submit"
             style={{
-              backgroundColor: '#388e3c',
+              backgroundColor: '#126636',
               color: 'white',
               padding: '10px 20px',
               borderRadius: '4px',
@@ -169,7 +169,7 @@ function GestionAnimales() {
       </div>
 
       {/* Mostrar los animales registrados */}
-      <h3 style={{ color: '#388e3c', marginTop: '20px' }}>Animales Registrados</h3>
+      <h3 style={{ color: '#126636', marginTop: '20px' }}>Animales Registrados</h3>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
         {animales.length > 0 ? (
           animales.map((animal, index) => (
@@ -183,7 +183,7 @@ function GestionAnimales() {
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
               }}
             >
-              <h3 style={{ color: '#388e3c' }}>{`ID: ${animal.codigoIdentificacion}`}</h3>
+              <h3 style={{ color: '#126636' }}>{`ID: ${animal.codigoIdentificacion}`}</h3>
               <p><strong>Especie:</strong> {animal.especie}</p>
               <p><strong>Fecha de Nacimiento:</strong> {animal.fechaNacimiento}</p>
               <p><strong>Sexo:</strong> {animal.sexo}</p>
@@ -204,7 +204,7 @@ function GestionAnimales() {
 const labelStyle = {
   display: 'block',
   fontSize: '14px',
-  color: '#388e3c',
+  color: '#126636',
 };
 
 const inputStyle = {

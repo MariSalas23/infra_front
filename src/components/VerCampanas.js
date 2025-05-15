@@ -15,7 +15,7 @@ const campañas = [
 function VerCampanas() {
   return (
     <div style={{ padding: '20px' }}>
-      <h2 style={{ textAlign: 'center', color: '#388e3c' }}>Ver Campañas</h2>
+      <h2 style={{ textAlign: 'center', color: '#126636' }}>Ver Campañas</h2>
       
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
         {campañas.map((campaña) => (
@@ -29,7 +29,7 @@ function VerCampanas() {
               boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
             }}
           >
-            <h3 style={{ color: '#388e3c' }}>{campaña.nombre}</h3>
+            <h3 style={{ color: '#126636' }}>{campaña.nombre}</h3>
             <p><strong>Fecha de Inicio:</strong> {campaña.fechaInicio}</p>
             <p><strong>Fecha de Fin:</strong> {campaña.fechaFin}</p>
             <p><strong>Estado:</strong> {campaña.estado}</p>

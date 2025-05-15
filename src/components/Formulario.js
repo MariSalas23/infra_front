@@ -14,7 +14,7 @@ function Formulario() {
 
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
-      <h2 style={{ textAlign: 'center', color: '#388e3c' }}>Registro de Vacunaciones</h2>
+      <h2 style={{ textAlign: 'center', color: '#126636' }}>Registro de Vacunaciones</h2>
       <form onSubmit={handleSubmit}>
         {/* ID del Animal */}
         <div style={{ marginBottom: '10px' }}>
@@ -74,7 +74,7 @@ function Formulario() {
         <button
           type="submit"
           style={{
-            backgroundColor: '#388e3c',
+            backgroundColor: '#126636',
             color: 'white',
             padding: '10px 20px',
             borderRadius: '4px',
@@ -94,7 +94,7 @@ function Formulario() {
 const labelStyle = {
   display: 'block',
   fontSize: '14px',
-  color: '#388e3c',
+  color: '#126636',
 };
 
 const inputStyle = {

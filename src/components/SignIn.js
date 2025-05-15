@@ -42,7 +42,7 @@ function SignIn() {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#e8f5e9', height: '100vh' }}>
+    <div style={{ padding: '20px', backgroundColor: '#93ba84', height: '100vh' }}>
       <div style={{
         maxWidth: '400px',
         margin: '0 auto',
@@ -52,7 +52,7 @@ function SignIn() {
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         textAlign: 'center',
       }}>
-        <h2 style={{ color: '#388e3c' }}>Crear Cuenta</h2>
+        <h2 style={{ color: '#126636' }}>Crear Cuenta</h2>
 
         <form onSubmit={handleSubmit}>
           {/* Email */}
@@ -139,7 +139,7 @@ function SignIn() {
           <button
             type="submit"
             style={{
-              backgroundColor: '#388e3c',
+              backgroundColor: '#126636',
               color: 'white',
               padding: '10px 20px',
               borderRadius: '4px',
@@ -160,7 +160,7 @@ function SignIn() {
 const labelStyle = {
   display: 'block',
   fontSize: '14px',
-  color: '#388e3c',
+  color: '#126636',
 };
 
 const inputStyle = {

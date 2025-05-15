@@ -11,7 +11,7 @@ const animales = [
 function VerAnimales() {
   return (
     <div style={{ padding: '20px' }}>
-      <h2 style={{ textAlign: 'center', color: '#388e3c' }}>Lista de Animales</h2>
+      <h2 style={{ textAlign: 'center', color: '#126636' }}>Lista de Animales</h2>
       
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
         {animales.length > 0 ? (
@@ -26,7 +26,7 @@ function VerAnimales() {
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
               }}
             >
-              <h3 style={{ color: '#388e3c' }}>{`ID: ${animal.id}`}</h3>
+              <h3 style={{ color: '#126636' }}>{`ID: ${animal.id}`}</h3>
               <p><strong>Especie:</strong> {animal.especie}</p>
               <p><strong>Fecha de Nacimiento:</strong> {animal.fechaNacimiento}</p>
               <p><strong>Sexo:</strong> {animal.sexo}</p>

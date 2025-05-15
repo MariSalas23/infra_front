@@ -13,7 +13,7 @@ import Home from './components/Home';
 function App() {
   return (
     <Router>
-      <div className="App" style={{ backgroundColor: '#e8f5e9', height: '100vh' }}>
+      <div className="App" style={{ backgroundColor: '#93ba84', height: '100vh' }}>
 
         <Routes>
           <Route path="/signin" element={<SignIn />} />

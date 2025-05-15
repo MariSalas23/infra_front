@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Menu() {
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h2 style={{ color: '#388e3c' }}>Menú Principal</h2>
+      <h2 style={{ color: '#126636' }}>Menú Principal</h2>
       <div style={{ marginTop: '20px' }}>
         <Link to="/formulario">
           <button style={buttonStyle}>Registrar Vacunación</button>
@@ -27,7 +27,7 @@ function Menu() {
 }
 
 const buttonStyle = {
-  backgroundColor: '#388e3c',
+  backgroundColor: '#126636',
   color: 'white',
   padding: '10px 20px',
   borderRadius: '4px',
