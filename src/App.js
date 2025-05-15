@@ -14,7 +14,6 @@ function App() {
   return (
     <Router>
       <div className="App" style={{ backgroundColor: '#e8f5e9', height: '100vh' }}>
-        <h1 style={{ textAlign: 'center', padding: '20px', color: '#388e3c' }}>Bienvenido a FEDEGÁN</h1>
 
         <Routes>
           <Route path="/signin" element={<SignIn />} />

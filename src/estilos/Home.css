@@ -1,0 +1,55 @@
+/* Contenedor principal de la página */
+.home-container {
+  padding: 20px;
+  background-color: #93ba84;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor del contenido central */
+.home-content {
+  max-width: 350px;
+  padding: 60px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Estilo para el título principal */
+.h1 {
+  color: #007b35;
+  font-size: 40px;
+}
+
+/* Estilo para el subtítulo */
+.h3 {
+  color: #0e273d;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+/* Estilo para el contenedor de los botones */
+.home-buttons {
+  margin-top: 20px;
+}
+
+/* Estilo de los botones */
+.home-button {
+  background-color: #126636;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  width: 70%;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.home-button:hover {
+  background-color: #126636;
+}
