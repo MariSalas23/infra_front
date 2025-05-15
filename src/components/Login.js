@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from "../baseApi";
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -11,38 +10,30 @@ function Login() {
     e.preventDefault();
 
     try {
-      // Realizar la solicitud POST a la API usando fetch
-      const response = await fetch(`${API_BASE_URL}usuarios/login/`, {
+      const response = await fetch('http://13.217.181.207/api/usuarios/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: username,
-          password,
+          password: password,
         }),
       });
 
-      // Verifica si la respuesta es exitosa
+      const data = await response.json();
+
       if (response.ok) {
-        const data = await response.json();
-        
-        // Suponiendo que la API devuelve el token de acceso
-        const { token } = data;
-
-        // Guardar el token en localStorage
+        const token = data.access; // <- Esta es la clave correcta según la respuesta de tu API
         localStorage.setItem('authToken', token);
-
         alert(`Bienvenido de nuevo, ${username}`);
-        navigate('/menu'); // Redirige a la página de menú después de login
+        navigate('/menu');
       } else {
-        const errorData = await response.json();
-        console.error('Error en el login:', errorData);
-        alert('Error al iniciar sesión. Por favor, revisa tus credenciales.');
+        alert('Credenciales incorrectas.');
       }
     } catch (error) {
-      console.error('Error al hacer la solicitud:', error);
-      alert('Hubo un problema con la solicitud. Intenta de nuevo.');
+      console.error('Error en login:', error);
+      alert('Ocurrió un error al iniciar sesión.');
     }
   };
 
@@ -52,9 +43,9 @@ function Login() {
         <h2 style={{ textAlign: 'center', color: '#126636' }}>Iniciar sesión</h2>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '10px' }}>
-            <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Nombre de usuario</label>
+            <label htmlFor="username" style={{ display: 'block', fontSize: '16px', color: '#126636' }}>Correo electrónico</label>
             <input
-              type="text"
+              type="email"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -93,12 +84,11 @@ function Login() {
   );
 }
 
-// Estilo para centrar el formulario verticalmente
 const containerStyle = {
-  height: '100vh', // Ocupa toda la altura de la pantalla
+  height: '100vh',
   display: 'flex',
-  justifyContent: 'center', // Centra horizontalmente
-  alignItems: 'center', // Centra verticalmente
+  justifyContent: 'center',
+  alignItems: 'center',
   backgroundColor: '#c5efb4',
 };
 

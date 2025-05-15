@@ -1,14 +1,36 @@
-import React from 'react';
-
-// Datos de ejemplo de animales
-const animales = [
-  { id: 'A123', especie: 'Bovino', fechaNacimiento: '2020-04-10', sexo: 'Macho', finca: 'Finca 1', municipio: 'Municipio 1', region: 'Región 1' },
-  { id: 'A124', especie: 'Porcino', fechaNacimiento: '2021-05-12', sexo: 'Hembra', finca: 'Finca 2', municipio: 'Municipio 2', region: 'Región 2' },
-  { id: 'A125', especie: 'Bovino', fechaNacimiento: '2019-08-22', sexo: 'Macho', finca: 'Finca 3', municipio: 'Municipio 3', region: 'Región 3' },
-  // Puedes agregar más animales aquí
-];
+import React, { useEffect, useState } from 'react';
 
 function VerAnimales() {
+  const [animales, setAnimales] = useState([]);
+
+  useEffect(() => {
+    const fetchAnimales = async () => {
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        alert('No se ha encontrado el token. Por favor, inicia sesión.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://13.217.181.207/api/animal/animales/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) throw new Error('Error en la respuesta de la API');
+
+        const data = await response.json();
+        setAnimales(data);
+      } catch (error) {
+        console.error('Error al obtener animales:', error);
+        alert('No se pudieron cargar los animales.');
+      }
+    };
+
+    fetchAnimales();
+  }, []);
+
   return (
     <div style={{ padding: '20px' }}>
       <h2 style={{ textAlign: 'center', color: '#126636' }}>Lista de Animales</h2>
@@ -26,9 +48,9 @@ function VerAnimales() {
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
               }}
             >
-              <h3 style={{ color: '#126636' }}>{`ID: ${animal.id}`}</h3>
+              <h3 style={{ color: '#126636' }}>{`ID: ${animal.codigo_identificacion}`}</h3>
               <p><strong>Especie:</strong> {animal.especie}</p>
-              <p><strong>Fecha de Nacimiento:</strong> {animal.fechaNacimiento}</p>
+              <p><strong>Fecha de Nacimiento:</strong> {animal.fecha_nacimiento}</p>
               <p><strong>Sexo:</strong> {animal.sexo}</p>
               <p><strong>Finca:</strong> {animal.finca}</p>
               <p><strong>Municipio:</strong> {animal.municipio}</p>
