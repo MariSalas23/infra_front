@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 function VerCampanas() {
   const [campañas, setCampañas] = useState([]);
 
-  const apiUrl = 'http://13.217.181.207/api/vacunacion/campañas';
+  const apiUrl = 'http://13.217.181.207/api/vacunacion/campanas';
 
   useEffect(() => {
     const fetchCampanas = async () => {
