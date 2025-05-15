@@ -1,15 +1,37 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Importa axios para realizar solicitudes HTTP
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Bienvenido de nuevo, ${username}`);
-    navigate('/menu'); // Redirige a la página de menú después de login
+
+    try {
+      // Enviar los datos de login (usuario y contraseña) a la API
+      const response = await axios.post('http://13.217.181.207/api/login', {
+        username,
+        password,
+      });
+
+      // Suponiendo que la API devuelve el token de acceso
+      const { token } = response.data;
+
+      // Guardar el token en localStorage o en una cookie
+      localStorage.setItem('authToken', token); // Aquí lo guardamos en localStorage
+
+      // También puedes guardarlo en una cookie si lo prefieres, por ejemplo:
+      // document.cookie = `authToken=${token}; path=/;`;
+
+      alert(`Bienvenido de nuevo, ${username}`);
+      navigate('/menu'); // Redirige a la página de menú después de login
+    } catch (error) {
+      console.error('Error en el login:', error);
+      alert('Error al iniciar sesión. Por favor, revisa tus credenciales.');
+    }
   };
 
   return (

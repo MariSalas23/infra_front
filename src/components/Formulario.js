@@ -1,15 +1,56 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Importa axios para realizar solicitudes HTTP
 
 function Formulario() {
-  const [idAnimal, setIdAnimal] = useState(''); // Estado para el ID del animal
-  const [idVacunador, setIdVacunador] = useState(''); // Estado para el ID del vacunador
-  const [campania, setCampania] = useState(''); // Estado para la campaña
+  const [idAnimal, setIdAnimal] = useState('');
+  const [idVacunador, setIdVacunador] = useState('');
+  const [campania, setCampania] = useState('');
   const [fecha, setFecha] = useState('');
+
+  // URL de la API (reemplaza con la URL real de tu API)
+  const apiUrl = 'http://13.217.181.207/api/vacunacion'; // URL de la API proporcionada
+
+  // Obtén el token de alguna fuente (localStorage, etc.)
+  const token = localStorage.getItem('authToken'); // Suponiendo que lo guardas en localStorage
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Formulario enviado');
-    // Aquí podrías manejar el envío del formulario (por ejemplo, guardarlo en una base de datos)
+
+    // Crear el objeto con los datos para enviar a la API
+    const datosVacunacion = {
+      idAnimal,
+      idVacunador,
+      campania,
+      fecha,
+    };
+
+    // Verifica si el token existe
+    if (!token) {
+      alert('No se ha encontrado el token de autenticación. Por favor, inicia sesión.');
+      return;
+    }
+
+    // Realizar la solicitud POST a la API usando axios
+    axios
+      .post(apiUrl, datosVacunacion, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Usa el token real en el encabezado
+        },
+      })
+      .then((response) => {
+        alert('Vacunación registrada exitosamente');
+        console.log(response.data); // Respuesta de la API
+      })
+      .catch((error) => {
+        console.error('Error al registrar la vacunación:', error);
+        alert('Error al registrar la vacunación');
+      });
+
+    // Limpiar los campos después de enviar el formulario
+    setIdAnimal('');
+    setIdVacunador('');
+    setCampania('');
+    setFecha('');
   };
 
   return (
